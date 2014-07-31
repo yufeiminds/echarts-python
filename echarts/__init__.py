@@ -1,7 +1,7 @@
 # coding: utf-8
 
-from .datastructure import Base
-from .datastructure import Axis, Legend, Tooltip, Series
+from .option import Base
+from .option import Axis, Legend, Tooltip, Series
 
 
 class Echart(Base):
