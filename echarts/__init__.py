@@ -2,10 +2,14 @@
 
 from .option import Base
 from .option import Axis, Legend, Tooltip, Series
+from .datastructure import *
+
+__version__ = '0.1'
+__author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
 class Echart(Base):
-    def __init__(self, title, description=None):
+    def __init__(self, title, description=None, **kwargs):
         self.title = {
             'text': title,
             'subtext': description,
@@ -15,20 +19,20 @@ class Echart(Base):
         self.y_axis = []
         self.series = []
 
-    def use(self, data):
-        if isinstance(data, Axis):
-            if data.position in ('bottom', 'top'):
-                self.x_axis.append(data)
+    def use(self, obj):
+        if isinstance(obj, Axis):
+            if obj.position in ('bottom', 'top'):
+                self.x_axis.append(obj)
             else:
-                self.y_axis.append(data)
+                self.y_axis.append(obj)
             return self
 
-        if isinstance(data, Legend):
-            self.legend = data
-        elif isinstance(data, Tooltip):
-            self.tooltip = data
-        elif isinstance(data, Series):
-            self.series.append(data)
+        if isinstance(obj, Legend):
+            self.legend = obj
+        elif isinstance(obj, Tooltip):
+            self.tooltip = obj
+        elif isinstance(obj, Series):
+            self.series.append(obj)
 
         return self
 
@@ -55,7 +59,3 @@ class Echart(Base):
             json['tooltip'] = self.tooltip.json
 
         return json
-
-    @classmethod
-    def create_from_data_frame(cls, df):
-        """Create an echart from pandas DataFrame."""
