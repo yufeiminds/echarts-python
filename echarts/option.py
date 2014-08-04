@@ -8,9 +8,6 @@ class Base(object):
         """JSON stringify format data."""
         return json.dumps(self.json)
 
-    def __dict__(self):
-        return self.json
-
     def __getitem__(self, key):
         return self.json.get(key)
 
