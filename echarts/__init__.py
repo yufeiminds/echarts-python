@@ -45,13 +45,13 @@ class Echart(Base):
         """JSON format data."""
         json = {
             'title': self.title,
-            'xAxis': self.x_axis,
-            'yAxis': self.y_axis,
-            'series': self.series,
+            'xAxis': list(map(dict, self.x_axis)),
+            'yAxis': list(map(dict, self.y_axis)),
+            'series': list(map(dict, self.series)),
         }
 
         if not hasattr(self, 'legend'):
-            self.legend = Legend(map(lambda o: o.name, self.data))
+            self.legend = Legend(list(map(lambda o: o.name, self.data)))
 
         json['legend'] = self.legend.json
 
