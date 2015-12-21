@@ -33,6 +33,8 @@ class Echart(Base):
             self.tooltip = obj
         elif isinstance(obj, Series):
             self.series.append(obj)
+        elif isinstance(obj, Toolbox):
+            self.toolbox = obj
 
         return self
 
@@ -57,5 +59,7 @@ class Echart(Base):
 
         if hasattr(self, 'tooltip'):
             json['tooltip'] = self.tooltip.json
+        if hasattr(self, 'toolbox'):
+            json['toolbox'] = self.tooltip.json
 
         return json
