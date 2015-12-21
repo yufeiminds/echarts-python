@@ -126,7 +126,7 @@ class Toolbox(Base):
         assert orient in ('horizontal', 'vertical')
         self.orient = orient
         if not position:
-            position = ('center', 'top')
+            position = ('right', 'top')
         self.position = position
         self._kwargs = kwargs
 
