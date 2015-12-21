@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from .option import Base
-from .option import Axis, Legend, Tooltip, Series
+from .option import Axis, Legend, Tooltip, Series, Toolbox
 from .datastructure import *
 
 __version__ = '0.1'
