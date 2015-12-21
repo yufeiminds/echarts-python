@@ -23,7 +23,7 @@ class Axis(Base):
     """Axis data structure."""
 
     def __init__(self, type, position, name='', data=None, **kwargs):
-        assert type in ('category', 'value')
+        assert type in ('category', 'value', 'time')
         self.type = type
         assert position in ('bottom', 'top', 'left', 'right')
         self.position = position
@@ -118,3 +118,12 @@ class Series(Base):
         if self._kwargs:
             json.update(self._kwargs)
         return json
+
+
+class Toolbox(Base):
+    def __init__():
+        pass
+
+    @property
+    def json(self):
+        pass
