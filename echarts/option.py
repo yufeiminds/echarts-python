@@ -121,9 +121,24 @@ class Series(Base):
 
 
 class Toolbox(Base):
-    def __init__():
-        pass
+    def __init__(self, show='false', orient='horizontal', position=None, **kwargs):
+        self.show = show
+        assert orient in ('horizontal', 'vertical')
+        self.orient = orient
+        if not position:
+            position = ('center', 'top')
+        self.position = position
+        self._kwargs = kwargs
 
     @property
     def json(self):
-        pass
+        json = {
+            'show': self.show,
+            'orient': self.orient,
+            'x': self.position[0],
+            'y': self.position[1]
+        }
+
+        if self._kwargs:
+            json.update(self._kwargs)
+        return json
