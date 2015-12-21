@@ -60,6 +60,6 @@ class Echart(Base):
         if hasattr(self, 'tooltip'):
             json['tooltip'] = self.tooltip.json
         if hasattr(self, 'toolbox'):
-            json['toolbox'] = self.tooltip.json
+            json['toolbox'] = self.toolbox.json
 
         return json
