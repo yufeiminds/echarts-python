@@ -121,7 +121,8 @@ class Series(Base):
 
 
 class Toolbox(Base):
-    def __init__(self, show='false', orient='horizontal', position=None, **kwargs):
+    def __init__(self, show='true', orient='horizontal', position=None, **kwargs):
+        assert show in ('true', 'false')
         self.show = show
         assert orient in ('horizontal', 'vertical')
         self.orient = orient
