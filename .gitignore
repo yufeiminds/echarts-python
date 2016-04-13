@@ -12,8 +12,11 @@ parts
 .installed.cfg
 docs/_build
 cover/
+.coverage
 .tox
 *.bak
 *.c
 *.so
 venv/
+.cache/
+*.swp
