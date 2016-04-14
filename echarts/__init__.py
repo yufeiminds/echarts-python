@@ -1,10 +1,10 @@
 # coding: utf-8
 
 from .option import Base
-from .option import Axis, Legend, Tooltip, Series
+from .option import Axis, Legend, Series, Tooltip, Toolbox
 from .datastructure import *
 
-__version__ = '0.1'
+__version__ = '0.1.0'
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
@@ -33,6 +33,8 @@ class Echart(Base):
             self.tooltip = obj
         elif isinstance(obj, Series):
             self.series.append(obj)
+        elif isinstance(obj, Toolbox):
+            self.toolbox = obj
 
         return self
 
@@ -57,5 +59,7 @@ class Echart(Base):
 
         if hasattr(self, 'tooltip'):
             json['tooltip'] = self.tooltip.json
+        if hasattr(self, 'toolbox'):
+            json['toolbox'] = self.toolbox.json
 
         return json

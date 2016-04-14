@@ -1,4 +1,4 @@
-#coding: utf-8
+# coding: utf-8
 
 import json
 
@@ -23,7 +23,7 @@ class Axis(Base):
     """Axis data structure."""
 
     def __init__(self, type, position, name='', data=None, **kwargs):
-        assert type in ('category', 'value')
+        assert type in ('category', 'value', 'time')
         self.type = type
         assert position in ('bottom', 'top', 'left', 'right')
         self.position = position
@@ -115,6 +115,27 @@ class Series(Base):
         }
         if self.name:
             json['name'] = self.name
+        if self._kwargs:
+            json.update(self._kwargs)
+        return json
+
+
+class Toolbox(Base):
+    def __init__(self, orient='horizontal', position=None, **kwargs):
+        assert orient in ('horizontal', 'vertical')
+        self.orient = orient
+        if not position:
+            position = ('right', 'top')
+        self.position = position
+        self._kwargs = kwargs
+
+    @property
+    def json(self):
+        json = {
+            'orient': self.orient,
+            'x': self.position[0],
+            'y': self.position[1]
+        }
         if self._kwargs:
             json.update(self._kwargs)
         return json
