@@ -1,0 +1,8 @@
+include README.rst
+
+recursive-include tests *
+recursive-exclude .cache *
+recursive-exclude *.egg-info *
+recursive-exclude * *.py[co]
+
+recursive-include docs *.rst
