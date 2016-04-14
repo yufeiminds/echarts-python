@@ -1,8 +1,8 @@
 # coding: utf-8
 
-from .option import Base
-from .option import Axis, Legend, Tooltip, Series
 from .datastructure import *
+from .option import Axis, Legend, Tooltip, Series, Toolbox
+from .option import Base
 
 __version__ = '0.1'
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
@@ -33,6 +33,8 @@ class Echart(Base):
             self.tooltip = obj
         elif isinstance(obj, Series):
             self.series.append(obj)
+        elif isinstance(obj, Toolbox):
+            self.toolbox = obj
 
         return self
 
@@ -45,10 +47,12 @@ class Echart(Base):
         """JSON format data."""
         json = {
             'title': self.title,
-            'xAxis': list(map(dict, self.x_axis)),
-            'yAxis': list(map(dict, self.y_axis)),
             'series': list(map(dict, self.series)),
         }
+        if self.x_axis:
+            json['xAxis'] = list(map(dict, self.x_axis))
+        if self.y_axis:
+            json['yAxis'] = list(map(dict, self.y_axis))
 
         if not hasattr(self, 'legend'):
             self.legend = Legend(list(map(lambda o: o.name, self.data)))
@@ -57,5 +61,7 @@ class Echart(Base):
 
         if hasattr(self, 'tooltip'):
             json['tooltip'] = self.tooltip.json
+        if hasattr(self, 'toolbox'):
+            json['toolbox'] = self.toolbox.json
 
         return json
