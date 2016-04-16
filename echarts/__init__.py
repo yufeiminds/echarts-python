@@ -1,10 +1,22 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
+"""
+    echarts
+    ~~~~~~~
+
+    An unofficial Echarts options generator with Python.
+
+    :copyright: (c) 2014 by Hsiaoming Yang <me@lepture.com>.
+    :license: MIT, see `MIT <https://opensource.org/licenses/MIT>`_ for more details.
+"""
+
+import logging
 from .option import Base
 from .option import Axis, Legend, Series, Tooltip, Toolbox
 from .datastructure import *
 
-__version__ = '0.1.0'
+__version__ = '0.1'
+__release__ = '0.1.0'
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
@@ -18,6 +30,8 @@ class Echart(Base):
         self.x_axis = []
         self.y_axis = []
         self.series = []
+
+        self.logger = logging.getLogger(__name__)
 
     def use(self, obj):
         if isinstance(obj, Axis):

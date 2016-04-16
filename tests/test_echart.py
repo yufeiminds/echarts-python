@@ -1,9 +1,9 @@
+# -*- coding: utf-8 -*-
 
 from echarts import (
-    Echart, Axis, Legend, Tooltip, Toolbox,
-    Line, Bar, Pie, Scatter,
-    Radar, Force, Chord, Map
+    Echart, Axis, Legend, Tooltip, Toolbox
 )
+from echarts.datastructure import VERSION_ALL
 from nose.tools import raises
 
 
@@ -30,7 +30,7 @@ def test_axis_assert_position():
 def test_legend():
     chart = Echart('Legend', 'Demo for legend')
     chart.use(Legend(['Item1 Title'], 'vertical', show=True))
-    
+
     assert chart.json['legend']['data']
 
 
@@ -66,7 +66,7 @@ def test_toolbox_assert():
 
 
 def test_datastructure():
-    for DS in (Line, Bar, Pie, Scatter, Radar, Force, Chord, Map):
+    for DS in VERSION_ALL:
         chart = Echart('GDP', 'This is a fake chart')
         chart.use(DS('2014', [2, 3, 4, 5], zlevel=0))
         assert len(chart.json['series']) > 0
