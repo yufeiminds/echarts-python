@@ -3,13 +3,13 @@ Echarts for Python
 
 An unofficial Echarts options generator with Python.
 
-.. image:: https://img.shields.io/pypi/v/echarts-python.svg
-   :target: https://pypi.python.org/pypi/echarts-python/
+.. image:: https://img.shields.io/pypi/v/Echarts.svg
+   :target: https://pypi.python.org/pypi/Echarts/
    :alt: Latest Version
-.. image:: https://travis-ci.org/yufeiminds/echarts-python.svg?branch=master
+.. image:: https://travis-ci.org/yufeiminds/echarts-python.svg?branch=develop
    :target: https://travis-ci.org/yufeiminds/echarts-python
    :alt: Travis CI Status
-.. image:: https://codecov.io/github/yufeiminds/echarts-python/coverage.svg?branch=master
+.. image:: https://codecov.io/github/yufeiminds/echarts-python/coverage.svg?branch=develop
    :target: https://codecov.io/github/yufeiminds/echarts-python?branch=master
    :alt: Codecov Status
 .. image:: https://readthedocs.org/projects/echarts-python/badge/?version=latest
@@ -41,7 +41,7 @@ Basic Usage
     chart.use(Legend(['GDP']))
     chart.use(Axis('category', 'bottom', data=['Nov', 'Dec', 'Jan', 'Feb']))
 
-The `chart.json` property will be ::
+The `chart.json` property will be
 
 .. code-block:: javascript
 
