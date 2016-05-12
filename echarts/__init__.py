@@ -61,8 +61,8 @@ class Echart(Base):
         """JSON format data."""
         json = {
             'title': self.title,
-            'xAxis': list(map(dict, self.x_axis)),
-            'yAxis': list(map(dict, self.y_axis)),
+            'xAxis': list(map(dict, self.x_axis)) or {},
+            'yAxis': list(map(dict, self.y_axis)) or {},
             'series': list(map(dict, self.series)),
         }
 

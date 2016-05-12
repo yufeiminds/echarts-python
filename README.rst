@@ -32,15 +32,18 @@ Current version for `Echarts 3.1.6 <http://echarts.baidu.com/option.html>`_
 Basic Usage
 -----------
 
-::
+.. code-block:: python
 
     from echarts import Echart, Legend, Bar
 
     chart = Echart('GDP', 'This is a fake chart')
-    chart.use(Bar('China', [2, 3, 4, 5], zlevel=0))
-    chart.use(Legend(['China']))
+    chart.use(Bar('China', [2, 3, 4, 5]))
+    chart.use(Legend(['GDP']))
+    chart.use(Axis('category', 'bottom', data=['Nov', 'Dec', 'Jan', 'Feb']))
 
 The `chart.json` property will be ::
+
+.. code-block:: javascript
 
     {
         "series": [
@@ -71,11 +74,11 @@ The `chart.json` property will be ::
 Contribution
 ------------
 
-This package authored by Hsiaoming Yang <me@lepture.com>.
+This package authored by Hsiaoming Yang <me@lepture.com> in 2014.
 
 If you have any question or want to improve this repository, welcome to create
 an `issue <https://github.com/yufeiminds/echarts-python/issues>`__
 or `pull requests <https://github.com/yufeiminds/echarts-python/pulls>`__ .
 
-This repo maintained by Yufei Li <yufeiminds@gmail.com> now,
+This repo is maintained by Yufei Li <yufeiminds@gmail.com> now,
 you can also send a email to me.
