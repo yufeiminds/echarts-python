@@ -1,14 +1,26 @@
 language: python
 python:
-  - '2.6'
-  - '2.7'
-  - '3.3'
-  - '3.4'
-  - '3.5'
+    - '2.6'
+    - '2.7'
+    - '3.3'
+    - '3.4'
+    - '3.5'
+    - 'pypy'
 install: pip install -U nose .
 script:
     - nosetests --verbose
-before_install:
-  - pip install codecov
 after_success:
-  - codecov
+    - pip install codecov
+    - codecov
+deploy:
+    provider: pypi
+    user: yufeiminds
+    password:
+        secure: faTGpM0NIte3bxmWowkA/CR0fBiaT0PYgIJywWs6iitwXfYEISZ0AEr/n5ibhsXWvLkFtnIQ+1a+s9WdC5hhajZJfABSh1rOvkzFmeJoNkcoragO7XEG8ODLwtezy2MfZFf7/NEa6cILra8D7pFbT1+uyF+nGWG4Yig8dGjAdHsfVDnhV9WD167jUJneikaM1SE054ONP5M6iUPv7hHSfVdi12DCq5Ej3uMWTZevZaqI6b6eVnwypwyB4NqE+eXlyjFQh8USkrRm6bWI0uz6LweePHQIrKxgtPsd0PeAdnZJK62eCYkyxKjrU44HEA8ZuVRQ6SHSGHl7A+CHtmp3SsgUnDaBHAjlVYAKfxyggY5OYHaiacQ/xT84GhLeEzhVd1yaPkWQULJtbSQAks92Cdyp6XGRB7H16Z/CFmK1pOXiDuF2DSB62EpzpsNQRIYZ8b9R8GYMWkZ40Bce10LaF+kadYefzdreliv6La4RC9wsEa9IgcSBYu/gdWNbqj3UfXa9BSMTpIEZFqrFv1R53Pb2bqIqzUGeAcg76ipEyYgpadpLdWlKD8IAQNK7+O29eE7lYOUQ32/WXzrtKvmNMpIJm7aMuuz0CwMtXINdVfzXp55D+d/16dmvf9NL1SUsV7O9r6h2FzWyRFj+DM+tPTulx70T9ZJdb7JeHmM1Zy4=
+    on:
+        tags: true
+        distributions: sdist bdist_wheel
+        repo: yufeiminds/echarts-python
+    skip_cleanup: true
+notifications:
+    email: false
