@@ -24,11 +24,11 @@ def fread(filename):
 
 
 setup(
-    name='Echarts',
+    name='echarts',
     version=echarts.__version__,
     author=author,
     author_email=author_email,
-    url='https://github.com/eleme/echarts-python',
+    url='https://github.com/yufeiminds/echarts-python',
     packages=["echarts"],
     description="Echarts binding for Python",
     zip_safe=False,
