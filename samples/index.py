@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 
-from echarts import Echart, Legend, Bar, Axis
-from flask import Flask, jsonify
+"""
+    index
+    ~~~~~
+
+    A sample chart with echarts-python.
+"""
+
 import functools
+from flask import Flask, jsonify
 from gevent.pywsgi import WSGIServer
+from echarts import Echart, Legend, Bar, Axis
 
 
 def create_app():
     app = Flask(__name__)
-
 
     def crossdomain(f):
         @functools.wraps(f)
@@ -18,8 +24,8 @@ def create_app():
             h['Access-Control-Allow-Origin'] = '*'
             h['Access-Control-Allow-Methods'] = 'GET'
             return resp
-        return wrapper
 
+        return wrapper
 
     @app.route('/opt/bar')
     @crossdomain
@@ -32,7 +38,8 @@ def create_app():
 
     return app
 
+
 if __name__ == '__main__':
     app = create_app()
-    http_server = WSGIServer(('',5000), app)
+    http_server = WSGIServer(('', 5000), app)
     http_server.serve_forever()
