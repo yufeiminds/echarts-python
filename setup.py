@@ -24,7 +24,7 @@ def fread(filename):
 
 
 setup(
-    name='echarts',
+    name='echarts-python',
     version=echarts.__version__,
     author=author,
     author_email=author_email,

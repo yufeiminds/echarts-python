@@ -10,13 +10,17 @@
     :license: MIT, see `MIT <https://opensource.org/licenses/MIT>`_ for more details.
 """
 
+import os
+import json
 import logging
+import tempfile
+import webbrowser
 from .option import Base
 from .option import Axis, Legend, Series, Tooltip, Toolbox
 from .datastructure import *
 
 __version__ = '0.1'
-__release__ = '0.1.0'
+__release__ = '0.1.1'
 __author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
@@ -77,3 +81,12 @@ class Echart(Base):
             json['toolbox'] = self.toolbox.json
 
         return json
+
+    def plot(self):
+        html = tempfile.NamedTemporaryFile(suffix='.html', delete=False)
+        with open(os.path.join(os.path.dirname(__file__), 'plot.j2')) as f:
+            template = f.read()
+            content = template.replace('{{ opt }}', json.dumps(self.json, indent=4))
+            html.write(content)
+        webbrowser.open('file://' + os.path.realpath(html.name))
+        html.close()
