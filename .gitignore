@@ -20,3 +20,4 @@ cover/
 venv/
 .cache/
 *.swp
+*.rdb

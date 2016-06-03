@@ -48,11 +48,19 @@ The `chart.json` property will be
 .. code-block:: javascript
 
     {
+        "title": {
+            "text": "GDP",
+            "subtext": "This is a fake chart"
+        },
         "series": [
             {
                 "type": "bar",
-                "zlevel": 0,
-                "data": [2, 3, 4, 5],
+                "data": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
                 "name": "China"
             }
         ],
@@ -60,16 +68,23 @@ The `chart.json` property will be
             "y": "top",
             "x": "center",
             "data": [
-                "China"
+                "GDP"
             ],
             "orient": "horizontal"
         },
-        "title": {
-            "text": "GDP",
-            "subtext": "This is a fake chart"
-        },
-        "xAxis": [],
-        "yAxis": []
+        "xAxis": [
+            {
+                "position": "bottom",
+                "data": [
+                    "Nov",
+                    "Dec",
+                    "Jan",
+                    "Feb"
+                ],
+                "type": "category"
+            }
+        ],
+        "yAxis": {}
     }
 
 on Mac OSX, you also can execute ::

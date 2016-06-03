@@ -6,3 +6,5 @@ recursive-exclude *.egg-info *
 recursive-exclude * *.py[co]
 
 recursive-include docs *.rst
+recursive-include echarts *.j2
+
