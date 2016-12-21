@@ -61,14 +61,20 @@ class Echart(Base):
         return self.series
 
     @property
-    def json(self):
-        """JSON format data."""
+    def json(self, axis=True):
+        """JSON format data.
+
+        Keyword Arguments:
+        axis -- type boolean, axis need or not (defautl: 'True')
+        """
         json = {
             'title': self.title,
-            'xAxis': list(map(dict, self.x_axis)) or {},
-            'yAxis': list(map(dict, self.y_axis)) or {},
             'series': list(map(dict, self.series)),
         }
+
+        if axis:
+            json['xAxis'] = list(map(dict, self.x_axis)) or {}
+            json['yAxis'] = list(map(dict, self.y_axis)) or {}
 
         if not hasattr(self, 'legend'):
             self.legend = Legend(list(map(lambda o: o.name, self.data)))
