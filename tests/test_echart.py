@@ -9,7 +9,8 @@ from nose.tools import raises
 
 def test_axis():
     chart = Echart('Axis', 'Proportion of Browser')
-    assert not chart.json['xAxis'] and not chart.json['yAxis']
+    assert len(chart.json['xAxis'][0]) == 0
+    assert len(chart.json['yAxis'][0]) == 0
     chart.use(Axis('category', 'bottom', 'proportion', inverse=True))
     assert chart.json['xAxis']
     chart.use(Axis('category', 'left', 'proportion', inverse=True))
