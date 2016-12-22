@@ -25,14 +25,17 @@ __author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
 class Echart(Base):
-    def __init__(self, title, description=None, **kwargs):
+    def __init__(self, title, description=None, axis=True, **kwargs):
         self.title = {
             'text': title,
             'subtext': description,
         }
 
-        self.x_axis = []
-        self.y_axis = []
+        self.axis = axis
+        if self.axis:
+            self.x_axis = []
+            self.y_axis = []
+
         self.series = []
 
         self.logger = logging.getLogger(__name__)
@@ -65,11 +68,12 @@ class Echart(Base):
         """JSON format data."""
         json = {
             'title': self.title,
-            'xAxis': list(map(dict, self.x_axis)) or {},
-            'yAxis': list(map(dict, self.y_axis)) or {},
             'series': list(map(dict, self.series)),
         }
 
+        if self.axis:
+            json['xAxis'] = list(map(dict, self.x_axis)) or {}
+            json['yAxis'] = list(map(dict, self.y_axis)) or {}
         if not hasattr(self, 'legend'):
             self.legend = Legend(list(map(lambda o: o.name, self.data)))
 
