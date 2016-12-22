@@ -76,14 +76,6 @@ class Echart(Base):
             json['xAxis'] = list(map(dict, self.x_axis)) or [{}]
             json['yAxis'] = list(map(dict, self.y_axis)) or [{}]
 
-        if not hasattr(self, 'legend'):
-            self.legend = Legend(list(map(lambda o: o.name, self.data)))
-
-        json['legend'] = self.legend.json
-        if self.axis:
-            json['xAxis'] = map(dict, self.x_axis) or [{}]
-            json['yAxis'] = map(dict, self.y_axis) or [{}]
-
         if hasattr(self, 'legend'):
             json['legend'] = self.legend.json
         if hasattr(self, 'tooltip'):
