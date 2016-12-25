@@ -156,3 +156,26 @@ class Toolbox(Base):
         if self._kwargs:
             json.update(self._kwargs)
         return json
+
+    
+class VisualMap(Base):
+    """maps data to visual channels"""
+
+    def __init__(self, type, min, max,  **kwargs):
+        assert type in ("continuous", "piecewise")
+        self.type = type
+        self.min = min
+        self.max = max
+        self._kwargs = kwargs
+
+    @property
+    def json(self):
+        """JSON format data"""
+        json = {
+            "type": self.type,
+            'min': self.min,
+            'max': self.max
+        }
+        if self._kwargs:
+            json.update(self._kwargs)
+        return json
