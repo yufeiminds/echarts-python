@@ -16,7 +16,7 @@ import logging
 import tempfile
 import webbrowser
 from .option import Base
-from .option import Axis, Legend, Series, Tooltip, Toolbox
+from .option import Axis, Legend, Series, Tooltip, Toolbox, VisualMap
 from .datastructure import *
 
 __version__ = '0.1'
@@ -57,6 +57,8 @@ class Echart(Base):
             self.series.append(obj)
         elif isinstance(obj, Toolbox):
             self.toolbox = obj
+        elif isinstance(obj, VisualMap):
+            self.visualMap = obj
 
         return self
 
@@ -82,6 +84,8 @@ class Echart(Base):
             json['tooltip'] = self.tooltip.json
         if hasattr(self, 'toolbox'):
             json['toolbox'] = self.toolbox.json
+        if hasattr(self, 'visualMap'):
+            json['visualMap'] = self.visualMap.json
 
         json.update(self.kwargs)
         return json
@@ -102,3 +106,14 @@ class Echart(Base):
             fobj.flush()
             webbrowser.open('file://' + os.path.realpath(fobj.name))
             persist or raw_input('Press enter for continue')
+                
+    def save(self, path, name):
+        """
+        Save html file into project dir
+        :param path: project dir
+        :param name: html file name
+        """
+        if not os.path.exists(path):
+            os.makedirs(path)
+        with open(path+str(name)+".html", "w") as html_file:
+            html_file.write(self._html())
