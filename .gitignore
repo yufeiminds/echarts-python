@@ -20,3 +20,6 @@ cover/
 venv/
 .cache/
 *.swp
+*.rdb
+coverage.xml
+htmlcov/

@@ -8,7 +8,7 @@ python:
     - 'pypy'
 install: pip install -U nose .
 script:
-    - nosetests --verbose
+    - nosetests --with-coverage --cover-package=echarts --verbose
 after_success:
     - pip install codecov
     - codecov

@@ -3,8 +3,8 @@ Echarts for Python
 
 An unofficial Echarts options generator with Python.
 
-.. image:: https://img.shields.io/pypi/v/Echarts.svg
-   :target: https://pypi.python.org/pypi/Echarts/
+.. image:: https://img.shields.io/pypi/v/echarts-python.svg
+   :target: https://pypi.python.org/pypi/echarts-python/
    :alt: Latest Version
 .. image:: https://travis-ci.org/yufeiminds/echarts-python.svg?branch=develop
    :target: https://travis-ci.org/yufeiminds/echarts-python
@@ -17,8 +17,10 @@ An unofficial Echarts options generator with Python.
    :alt: Doc Status
 
 -  Free software: MIT license
--  Documentation: https://echarts-python.readthedocs.com/en/
--  Online demo: https://yufeiminds.github.io/echarts-python/
+-  Documentation: http://echarts-python.readthedocs.io/en/stable/ (NOT Ready)
+-  Online demo: https://yufeiminds.github.io/echarts-python/ (NOT Ready)
+
+This repo still on developing (ALPHA), DON'T USE IT IN PRODUCTION.
 
 Installation
 ------------
@@ -46,11 +48,19 @@ The `chart.json` property will be
 .. code-block:: javascript
 
     {
+        "title": {
+            "text": "GDP",
+            "subtext": "This is a fake chart"
+        },
         "series": [
             {
                 "type": "bar",
-                "zlevel": 0,
-                "data": [2, 3, 4, 5],
+                "data": [
+                    2,
+                    3,
+                    4,
+                    5
+                ],
                 "name": "China"
             }
         ],
@@ -58,17 +68,30 @@ The `chart.json` property will be
             "y": "top",
             "x": "center",
             "data": [
-                "China"
+                "GDP"
             ],
             "orient": "horizontal"
         },
-        "title": {
-            "text": "GDP",
-            "subtext": "This is a fake chart"
-        },
-        "xAxis": [],
-        "yAxis": []
+        "xAxis": [
+            {
+                "position": "bottom",
+                "data": [
+                    "Nov",
+                    "Dec",
+                    "Jan",
+                    "Feb"
+                ],
+                "type": "category"
+            }
+        ],
+        "yAxis": {}
     }
+
+on Mac OSX, you also can execute ::
+
+    chart.plot()
+
+and invoke a browser to display the chart.
 
 
 Contribution

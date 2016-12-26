@@ -41,5 +41,6 @@ def create_app():
 
 if __name__ == '__main__':
     app = create_app()
+    print('Serve on http://localhost:5000')
     http_server = WSGIServer(('', 5000), app)
     http_server.serve_forever()
