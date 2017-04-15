@@ -101,6 +101,10 @@ class Echart(Base):
 
         :param persist: persist output html to disk
         """
+        logging.warn(
+            'Deprecated. This method will be removed on next generation\n'
+            'Please use echarts.contrib.fs.plot'
+        )
         with tempfile.NamedTemporaryFile(suffix='.html', delete=not persist) as fobj:
             fobj.write(self._html())
             fobj.flush()
@@ -110,9 +114,14 @@ class Echart(Base):
     def save(self, path, name):
         """
         Save html file into project dir
+
         :param path: project dir
         :param name: html file name
         """
+        logging.warn(
+            'Deprecated. This method will be removed on next generation\n'
+            'Please use echarts.contrib.fs.save'
+        )
         if not os.path.exists(path):
             os.makedirs(path)
         with open(path+str(name)+".html", "w") as html_file:

@@ -23,3 +23,7 @@ venv/
 *.rdb
 coverage.xml
 htmlcov/
+
+.idea/
+.vscode/
+.ipynb_checkpoints
