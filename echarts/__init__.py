@@ -15,6 +15,7 @@ import json
 import logging
 import tempfile
 import webbrowser
+import codecs
 from .option import Base
 from .option import Axis, Legend, Series, Tooltip, Toolbox, VisualMap
 from .datastructure import *
@@ -91,7 +92,7 @@ class Echart(Base):
         return json
 
     def _html(self):
-        with open(os.path.join(os.path.dirname(__file__), 'plot.j2')) as f:
+        with codecs.open(os.path.join(os.path.dirname(__file__), 'plot.j2'), encoding='utf8') as f:
             template = f.read()
             return template.replace('{{ opt }}', json.dumps(self.json, indent=4))
 
@@ -102,7 +103,7 @@ class Echart(Base):
         :param persist: persist output html to disk
         """
         with tempfile.NamedTemporaryFile(suffix='.html', delete=not persist) as fobj:
-            fobj.write(self._html())
+            fobj.write(self._html().encode('utf8'))
             fobj.flush()
             webbrowser.open('file://' + os.path.realpath(fobj.name))
             persist or raw_input('Press enter for continue')
