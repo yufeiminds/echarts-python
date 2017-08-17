@@ -25,7 +25,8 @@ __author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
 class Echart(Base):
-    def __init__(self, title, description=None, axis=True, **kwargs):
+    def __init__(self, title,js_path=None, description=None, axis=True, **kwargs):
+        self.js_path = js_path
         self.title = {
             'text': title,
             'subtext': description,
@@ -91,9 +92,13 @@ class Echart(Base):
         return json
 
     def _html(self):
+        echarts_js_path = 'https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.min.js'
+        if self.js_path:
+            echarts_js_path=self.js_path
         with open(os.path.join(os.path.dirname(__file__), 'plot.j2')) as f:
             template = f.read()
-            return template.replace('{{ opt }}', json.dumps(self.json, indent=4))
+            return template.replace('{{ opt }}', json.dumps(self.json, indent=4)
+            ).replace('{{echarts_js_path}}', echarts_js_path)
 
     def plot(self, persist=True):
         """
@@ -106,7 +111,7 @@ class Echart(Base):
             fobj.flush()
             webbrowser.open('file://' + os.path.realpath(fobj.name))
             persist or raw_input('Press enter for continue')
-                
+
     def save(self, path, name):
         """
         Save html file into project dir
