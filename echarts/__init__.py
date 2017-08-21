@@ -11,6 +11,7 @@
 """
 
 import os
+import sys
 import json
 import logging
 import tempfile
@@ -25,7 +26,18 @@ __author__ = 'Hsiaoming Yang <me@lepture.com>'
 
 
 class Echart(Base):
-    def __init__(self, title,js_path=None, description=None, axis=True, **kwargs):
+    validOptions = ['title', 'legend', 'grid', 'xAxis', 'yAxis', 'polar',
+        'radiusAxis', 'angleAxis', 'radar', 'dataZoom', 'visualMap', 'tooltip',
+        'axisPointer', 'toolbox', 'brush', 'geo', 'parallel', 'parallelAxis',
+        'singleAxis', 'timeline', 'graphic', 'calendar', 'series', 'color',
+        'backgroundColor', 'textStyle', 'animation', 'animationThreshold',
+        'animationDuration', 'animationEasing', 'animationDelay',
+        'animationDurationUpdate', 'animationEasingUpdate',
+        'animationDelayUpdate', 'progressive', 'progressiveThreshold',
+        'blendMode', 'hoverLayerThreshold', 'useUTC']
+
+    def __init__(self, title, js_path=None, description=None, axis=True,
+            **kwargs):
         self.js_path = js_path
         self.title = {
             'text': title,
@@ -60,6 +72,8 @@ class Echart(Base):
             self.toolbox = obj
         elif isinstance(obj, VisualMap):
             self.visualMap = obj
+        elif isinstance(obj, dict):
+            self.others = obj
 
         return self
 
@@ -87,6 +101,13 @@ class Echart(Base):
             json['toolbox'] = self.toolbox.json
         if hasattr(self, 'visualMap'):
             json['visualMap'] = self.visualMap.json
+        if hasattr(self, 'others'):
+            for key in self.others.keys():
+                if key in self.validOptions:
+                    json[key] = self.others[key]
+                else:
+                    sys.stderr('Invalid Option: %s' % key)
+                    exit(-1)
 
         json.update(self.kwargs)
         return json
@@ -94,7 +115,7 @@ class Echart(Base):
     def _html(self):
         echarts_js_path = 'https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.min.js'
         if self.js_path:
-            echarts_js_path=self.js_path
+            echarts_js_path = self.js_path
         with open(os.path.join(os.path.dirname(__file__), 'plot.j2')) as f:
             template = f.read()
             return template.replace('{{ opt }}', json.dumps(self.json, indent=4)
@@ -106,7 +127,8 @@ class Echart(Base):
 
         :param persist: persist output html to disk
         """
-        with tempfile.NamedTemporaryFile(suffix='.html', delete=not persist) as fobj:
+        with tempfile.NamedTemporaryFile(suffix='.html',
+                delete=not persist) as fobj:
             fobj.write(self._html())
             fobj.flush()
             webbrowser.open('file://' + os.path.realpath(fobj.name))
@@ -120,5 +142,5 @@ class Echart(Base):
         """
         if not os.path.exists(path):
             os.makedirs(path)
-        with open(path+str(name)+".html", "w") as html_file:
+        with open(path + str(name) + ".html", "w") as html_file:
             html_file.write(self._html())
