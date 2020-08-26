@@ -1,7 +1,7 @@
-Echarts for Python
+Apache ECharts (incubating) for Python
 ==================
 
-An unofficial Echarts options generator with Python.
+An unofficial Apache ECharts (incubating) options generator with Python.
 
 .. image:: https://img.shields.io/pypi/v/echarts-python.svg
    :target: https://pypi.python.org/pypi/echarts-python/
