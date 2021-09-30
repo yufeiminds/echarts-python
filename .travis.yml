@@ -24,3 +24,5 @@ deploy:
     skip_cleanup: true
 notifications:
     email: false
+print mail
+write
