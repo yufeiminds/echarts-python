@@ -25,3 +25,4 @@ deploy:
 notifications:
     email: false
 print mail
+write
