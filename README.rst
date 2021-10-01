@@ -104,4 +104,4 @@ an `issue <https://github.com/yufeiminds/echarts-python/issues>`__
 or `pull requests <https://github.com/yufeiminds/echarts-python/pulls>`__ .
 
 This repo is maintained by Yufei Li <yufeiminds@gmail.com> now,
-you can also send a email to me.
+you can also send a email to me.;)
